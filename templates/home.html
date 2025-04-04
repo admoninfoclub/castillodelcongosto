@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<title>Bodas</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<style type="text/css">
+    .imgRedonda60 {
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+    }
+    h1 {
+        /* color: gold; */  /* oro */
+        color: #ffd700;  /* Dorado */
+        font-family: 'Cinzel', serif;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+        /* background-image: url("{% static 'images/congosto06.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        padding: 20px; */
+    }
+
+    /* Aplicar la fuente gótica al texto del enlace */
+    .gothic-font {
+        font-family: 'Uncial Antiqua', cursive; /* Fuente gótica */
+        font-size: 28x; /* Tamaño de la fuente */
+        color: gold; /* Color del texto oro */
+    }
+
+    .gothic-font-h1 {
+      font-family: 'Gothic', sans-serif; /* Cambia la fuente a una gótica si la tienes */
+  font-size: 3rem;  /* Tamaño grande para el encabezado */
+  color: #ffd700;  /* Color dorado (puedes cambiarlo) */
+  text-align: center;
+  opacity: 0;  /* Inicialmente invisible */
+  transform: translateY(50px); /* Comienza un poco abajo */
+  animation: fadeInUp 2.5s ease-out forwards; /* Aplicando la animación */
+}
+
+/* Animación: Fade-in y desplazamiento hacia arriba */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px); /* Empieza debajo de su posición original */
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(20px); /* Subiendo lentamente */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* Llega a su posición final */
+  }
+}
+
+</style>
+
+<style>
+        /* Contenedor principal */
+        .scroll {
+            width: 80%;
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* El pergamino en sí */
+        .scroll-inner {
+            width: 100%;
+            height: 500px;
+            background-color: #f4e1c1;
+            border: 4px solid #8b5e3c;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transform-origin: top;
+            animation: abrirPergamino 6s ease-in-out forwards;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Efecto de abrir el pergamino */
+        @keyframes abrirPergamino {
+            0% {
+                transform: scaleY(0);
+            }
+            50% {
+                transform: scaleY(1.1);
+            }
+            100% {
+                transform: scaleY(1);
+            }
+        }
+
+        /* Textura del pergamino */
+        .scroll-inner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/old-map.png');
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        /* Detalles de las esquinas del pergamino */
+        .corner {
+            width: 60px;
+            height: 60px;
+            background-color: #8b5e3c;
+            position: absolute;
+            top: 0;
+            z-index: 2;
+            border-radius: 0 0 20px 0;
+            opacity: 0;
+            animation: mostrarEsquinas 2s ease-out forwards;
+        }
+
+        .corner-left {
+            left: 0;
+        }
+
+        .corner-right {
+            right: 0;
+            border-radius: 0 0 0 20px;
+        }
+
+        @keyframes mostrarEsquinas {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Contenido del pergamino */
+        .content {
+            font-family: 'Georgia', serif;
+            font-size: 20px;
+            color: #4a2e1c;
+            line-height: 1.8;
+            text-align: justify;
+            z-index: 2;
+            position: relative;
+        }
+
+        .content h1 {
+            font-size: 36px;
+            color: #8b5e3c;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Para mejorar la legibilidad */
+        .content p {
+            margin-bottom: 20px;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+<br><br><br><br>
+
+{% if not request.user.is_authenticated %}
+    <h1 class="gothic-font-h1">BODAS EN EL CASTILLO PUENTE DEL CONGOSTO</h1>
+{% endif %}
+
+<br>
+
+<!-- Carrusel Bootstrap 3.3.5 -->
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="{% static 'images/congosto06.jpg' %}" class="img-responsive" alt="Destinos turísticos 1">
+    </div>
+    <div class="item">
+      <img src="{% static 'images/congosto07.jpg' %}" class="img-responsive" alt="Destinos turísticos 2">
+    </div>
+    <div class="item">
+      <img src="{% static 'images/congosto08.jpg' %}" class="img-responsive" alt="Destinos turísticos 3">
+    </div>
+  </div>
+  <a class="left carousel-control" href="#carouselExampleIndicators" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carouselExampleIndicators" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+
+<br>
+
+{% if not request.user.is_authenticated %}
+<center>
+    <a href="https://www.bodas.net"
+        target="_blank"
+        style="text-decoration: none;">
+        <h2>Acceso a bodas.net</h2></a>
+</center>
+{% else %}
+    <div class="user d-inline-block">
+        <span class="name">{{ user.username }}</span>
+        <span><img alt="Avatar" src="{{ fotoperfil }}" class="imgRedonda60" /></span>
+    </div>
+
+    <p>Bienvenido, {{ user.username }}!</p>
+    <a href="{% url 'cerrar' %}">Logout</a>
+{% endif %}
+
+{% endblock %}

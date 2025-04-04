@@ -1,0 +1,148 @@
+{% extends "base1.html" %}
+{% load static %}
+
+{% block head %}
+<title>CASTILLO</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<style type="text/css">
+    .imgRedonda60 {
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+    }
+     h1 {
+        color: #000000;  /* Cambia el color de la letra a negro */
+    }
+
+    /* Aplicar la fuente gótica al texto del enlace */
+    .gothic-font {
+        font-family: 'Uncial Antiqua', cursive; /* Fuente gótica */
+        font-size: 28x; /* Tamaño de la fuente */
+        color: #000000; /* Color del texto negro */
+    }
+    .gothic-font-h1 {
+        font-family: 'Uncial Antiqua', cursive; /* Fuente gótica */
+        font-size: 28x; /* Tamaño de la fuente */
+        color: #000000; /* Color del texto negro */
+    }
+
+</style>
+
+<style>
+        /* Contenedor principal */
+        .scroll {
+            width: 80%;
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* El pergamino en sí */
+        .scroll-inner {
+            width: 100%;
+            height: 500px;
+            background-color: #f4e1c1;
+            border: 4px solid #8b5e3c;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transform-origin: top;
+            animation: abrirPergamino 6s ease-in-out forwards;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Efecto de abrir el pergamino */
+        @keyframes abrirPergamino {
+            0% {
+                transform: scaleY(0);
+            }
+            50% {
+                transform: scaleY(1.1);
+            }
+            100% {
+                transform: scaleY(1);
+            }
+        }
+
+        /* Textura del pergamino */
+        .scroll-inner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/old-map.png');
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        /* Detalles de las esquinas del pergamino */
+        .corner {
+            width: 60px;
+            height: 60px;
+            background-color: #8b5e3c;
+            position: absolute;
+            top: 0;
+            z-index: 2;
+            border-radius: 0 0 20px 0;
+            opacity: 0;
+            animation: mostrarEsquinas 2s ease-out forwards;
+        }
+
+        .corner-left {
+            left: 0;
+        }
+
+        .corner-right {
+            right: 0;
+            border-radius: 0 0 0 20px;
+        }
+
+        @keyframes mostrarEsquinas {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Contenido del pergamino */
+        .content {
+            font-family: 'Georgia', serif;
+            font-size: 20px;
+            color: #4a2e1c;
+            line-height: 1.8;
+            text-align: justify;
+            z-index: 2;
+            position: relative;
+        }
+
+        .content h1 {
+            font-size: 36px;
+            color: #8b5e3c;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Para mejorar la legibilidad */
+        .content p {
+            margin-bottom: 20px;
+        }
+    </style>
+
+
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

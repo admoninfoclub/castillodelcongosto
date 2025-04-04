@@ -1,0 +1,122 @@
+{% load static %}
+
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-light" style="background-color: #F7F9F9 !important;">
+<!--<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #4C3F51 !important;">-->
+    <div class="container-fluid">
+        <div class="navbar-header">
+		    {% if not request.user.is_authenticated %}
+			<a class="navbar-brand" href="/"
+			   style="padding-top:0px;">
+			<img src="{% static 'images/logo.png' %}" height='48' width='48'>
+			</a>
+			{% endif %}
+		</div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+
+			    <!-- bloque 1 usuarios anonimos no autorizados se quedan en la landing Page -->
+			    {% if not request.user.is_authenticated %}
+				    <li><a href="{% url 'home' %}">   <font size="5" color="#0000FF">INICIO</font></a></li>
+                    <li><a href="{% url 'castillo' %}"><font size="5" color="#0000FF">CASTILLO</font></a></li>
+				    <li><a href="{% url 'sobremi' %}"><font size="5" color="#0000FF">BODAS</font></a></li>
+					<li><a href="{% url 'sobremi' %}"><font size="5" color="#0000FF">DOSSIER PDF</font></a></li>
+					<li><a href="{% url 'sobremi' %}"><font size="5" color="#0000FF">UBICACIÓN</font></a></li>
+
+				<!-- {#
+					<li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                     Mi Perfil <span class="caret"></span>
+                     </a>
+						<ul class="dropdown-menu">
+							<li><a href="{% url 'sobremi' %}">Mis Experiencias</a></li>
+							<li><a href="{% url 'sobremi' %}">Mis Estudios</a></li>
+							<li><a href="{% url 'sobremi' %}">Seguidores</a></li>
+							<li><a href="{% url 'sobremi' %}">Seguidos</a></li>
+							<li><a href="{% url 'sobremi' %}">Notificaciones</a></li>
+						</ul>
+					</li>
+                 #} -->
+
+				{% endif %}
+
+				<!-- bloque 2 usuarios autorizados -->
+				{% if request.user.is_authenticated %}
+					<li><a href="{% url 'home' %}"><font size="5" color="#0000FF">Inicio</font></a></li>
+					<li><a href="{% url 'sobremi' %}"><font size="5" color="#0000FF">Mis Experiencias</font></a></li>
+      		        <li><a href="{% url 'sobremi' %}"><font size="5" color="#0000FF">Mis Estudios</font></a></li>
+				    <li><a href="{% url 'sobremi' %}"><font size="5" color="#0000FF">Seguidores</font></a></li>
+				    <li><a href="{% url 'sobremi' %}"><font size="5" color="#0000FF">Seguidos</font></a></li>
+				    <li><a href="{% url 'sobremi' %}"><font size="5" color="#0000FF">Notificaciones</font></a></li>
+					<li><a href="{% url 'sobremi' %}"><font size="5" color="#0000FF">Diplomas</font></a></li>
+					<li><a href="{% url 'sobremi' %}"><font size="5" color="#0000FF">Videos</font></a></li>
+					<li><a href="{% url 'sobremi' %}"><font size="5" color="#0000FF">Enviar email</font></a></li>
+
+				{% endif %}
+            </ul>
+
+			<!-- inicio nuevo bloque para login y register-->
+			<ul class="nav navbar-nav navbar-right">
+			{% if request.user.is_authenticated %}
+				 <li><a href="{% url 'sobremi' %}"><font size="5" color="#0000FF">Cerrar Sesión</font></a></li>
+			{% endif %}
+
+			{% if not request.user.is_authenticated %}
+			  <a class="btn btn-register" href="{% url 'sobremi' %}" style="margin-top: 7px;">
+			           <font size="5" color="#686868">Registro</font>
+			  </a>
+			{% endif %}
+
+			</ul>
+			<!-- usuario anónimo -->
+			{% if not request.user.is_authenticated and not "/accounts/login" in request.get_full_path %}
+ 			 <form class='navbar-form navbar-right' method='POST' action=''>
+			{% csrf_token %}
+			<a href='{% url "sobremi" %}' class="btn btn-enter"
+               style="color: #F2F2F2!important; background-color: #7A3D43;
+			   font-size: 22px; padding: 12px 25px; text-decoration: none; border-radius: 8px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);">
+               Entrar</a>
+			</form>
+
+			{% endif %}
+        </div>
+    </div>
+</nav>
+<br>
+<!-- Estilo adicional para los botones -->
+<style>
+    .btn-register, .btn-enter {
+        font-family: 'Cinzel', serif;
+        font-weight: bold;
+        border: none;
+        border-radius: 25px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+    .btn-register {
+        background-color: #C6A84B; /* Dorado elegante */
+        color: #F2F2F2;
+        padding: 10px 20px;
+    }
+
+    .btn-register:hover {
+        background-color: #7A3D43; /* Burdeos oscuro */
+        color: #fff;
+        transform: translateY(-3px);
+    }
+
+    .btn-enter {
+        background-color: #2E9AFE; /* Azul palacio */
+        color: #F2F2F2;
+        padding: 12px 25px;
+        font-size: 22px;
+    }
+
+    .btn-enter:hover {
+        background-color: #7A3D43; /* Burdeos oscuro */
+        color: #fff;
+        transform: translateY(-3px);
+    }
+</style>

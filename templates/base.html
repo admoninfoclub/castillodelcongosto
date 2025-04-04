@@ -1,0 +1,99 @@
+{% load static %}
+
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="{% block description %}{% endblock %}"/>
+        <title>{% block title %} Inicio {% endblock %}</title>
+        <!-- Fuentes Google -->
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+        <!-- Incluir fuente gótica de Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
+
+      <style>
+        body {
+            font-family: 'Lora', serif;
+            background-color: #f4f1e1; /* Color de fondo marfil suave */
+            color: #333333; /* Texto oscuro para mejor legibilidad */
+        }
+        h2, h3 {
+            /* font-family: 'Playfair Display', serif; */
+            color: #7A3D43; /* Burdeos para los títulos */
+            font-family: 'Cinzel', serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+        color: gold; /* oro */
+        /* color: #ffd700;  */ /* Dorado */
+        font-family: 'Cinzel', serif;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+        .navbar, .footer {
+            font-family: 'Cinzel', serif;
+        }
+    </style>
+    <style>
+.navbar {
+    background-color: #4C3F51; /* Azul oscuro elegante para la navbar */
+    border-bottom: 2px solid #C6A84B; /* Dorado para detalles */
+}
+
+.navbar a {
+    color: #C6A84B; /* Dorado para los enlaces */
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #D4AF37; /* Dorado más brillante en hover */
+}
+
+footer {
+    background-color: #333333;
+    color: #f4f1e1;
+    padding: 20px;
+}
+
+footer a {
+    color: #C6A84B; /* Dorado para enlaces en el footer */
+}
+
+footer a:hover {
+    color: #D4AF37;
+}
+
+.btn-primary {
+    background-color: #7A3D43; /* Burdeos para botones */
+    border-color: #7A3D43;
+}
+
+.btn-primary:hover {
+    background-color: #C6A84B; /* Dorado brillante en hover */
+    border-color: #C6A84B;
+}
+    </style>
+
+   {% block head %}
+  {% endblock %}
+  </head>
+
+    <body>
+        {% include "navbar.html" %}
+
+        <div class="container">
+            {% block content %}
+            <!-- {#
+            <div style="background-image: url('{% static 'images/congosto06.jpg' %}'); background-size: cover; background-position: center;">
+            </div>
+             #} -->
+           {% endblock %}
+        </div>
+
+        {# {% include "footer.html" %} #}
+
+		{% block scripts %}
+		{% endblock %}
+    </body>
+</html>
