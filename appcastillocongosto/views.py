@@ -109,6 +109,9 @@ def login_view(request):
             return render(request, 'login.html', {'error': 'Credenciales inválidas'})
     return render(request, 'login.html')
 
+################################################
+# El registro de usuarios
+################################################
 def register_view(request):
     if request.method == 'POST':
         username = request.POST['username']
