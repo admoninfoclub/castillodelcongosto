@@ -37,13 +37,16 @@ INSTALLED_APPS = [
     #'allauth',
 ]
 
+# Middlewares para producción
+#importante agregar WhiteNoise justo después de SecurityMiddleware:
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # solo si estás en producción
+    'django.contrib.sessions.middleware.SessionMiddleware',  # <-- obligatorio
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # <-- obligatorio
+    'django.contrib.messages.middleware.MessageMiddleware',  # <-- obligatorio
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -153,16 +156,17 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 #STATIC_URL = 'static/'
-#la parte estática es obligatoria para Heroku y para nuestra máquina
+#la parte estática es obligatoria para Render y para nuestra máquina
+
 STATIC_URL = '/static/'    #js, css3, ..
 MEDIA_URL = '/media/'  #videos, imágenes
 
-#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') ??render
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# Para desarrollo: decirle a Django dónde están los archivos estáticos
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+'''
 # declara la ruta donde se enlazará el contenido estático
+#la declaración anterior anula todo éste bloque 
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
 	('css', os.path.join(STATIC_ROOT, 'css')),
@@ -170,13 +174,19 @@ STATICFILES_DIRS = (
 	('images', os.path.join(STATIC_ROOT, 'images')),
     ('img', os.path.join(STATIC_ROOT, 'img')),
 )
+'''
+# Para producción: aquí se copiarán los archivos tras collectstatic
+if DEBUG == False:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# List of finder classes that know how to find static files in
-# various locations.
-STATICFILES_FINDERS = (
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Encontrar archivos estáticos
+STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
+]
+
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',

@@ -25,4 +25,7 @@ urlpatterns = [
     path('descargar_pdf/<str:filename>/', views.descargar_pdf, name='descargar_pdf'),
     path('mostrar_pdf/<str:filename>/', views.mostrar_pdf, name='mostrar_pdf'),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Solo en desarrollo, para servir archivos estáticos
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -6,7 +6,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="{% static 'css/castillo.css' %}">
 <style type="text/css">
     .imgRedonda60 {
         width: 60px;
@@ -178,7 +178,7 @@
 {% block content %}
 
 <br><br><br><br>
-
+<h4>INICIO</h4>
 {% if not request.user.is_authenticated %}
     <h1 class="gothic-font-h1">BODAS EN EL CASTILLO PUENTE DEL CONGOSTO</h1>
 {% endif %}
